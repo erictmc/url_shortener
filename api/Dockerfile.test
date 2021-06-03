@@ -20,6 +20,8 @@ RUN apk add --no-cache bash grep
 
 COPY --from=builder /go/bin/api /go/bin/api
 COPY --from=builder $APP_HOME/web/build $APP_HOME/web/build
+COPY --from=builder $APP_HOME/schema/schema.sql $APP_HOME/schema/schema.sql
+
 
 CMD /go/bin/api
 EXPOSE 8080

@@ -20,21 +20,21 @@ Both require Docker (along with docker-compose) to be available
 on one's machine.
 
 ### Test Environment
-This is run with the following command, while in the root of the repo directory:
+This environment is primarily intended CI/CD purposes. That being said, you can run it locally
+with minimal setup. For examining the app, this is probably the best approach. 
+
+While in the root of the repo directory, run the following:
 `docker-compose -f docker-compose.test.yml up`.
 
-This builds the API code and places it on a Docker image. As part of this,
-it also builds the React web app, and places the optimized bundle in a
-static directory on the image.  If docker-compose is successful,
-then you should be able to visit `http://localhost:8080`,
-and see a webapp. 
+It takes a moment to build the image. This builds the API code and 
+places it on a Docker image. As part of this, it also builds the React web 
+app, and places the optimized bundle in a static directory on the image.  If 
+docker-compose is successful, then you should be able to visit `http://localhost:8080`,
+and see a fully functioning webapp. 
 
 **IMPORTANT:** If you are running in this environment, it will not have
-hot-reloads available. Any changes you make to the code-- either to the server or 
-client-side code -- WILL NOT BE VISIBLE to the docker container. To 
-have hot-reloads enabled, see the *Local Development* environment below.
-
-Note: The Testing environment is also used in the CI pipeline.
+hot-reloads available for server or client code. Any changes you make to the code WILL NOT BE VISIBLE
+to the docker container. To have hot-reloads enabled, see the *Local Development* environment below.
 
 ### Local Development 
 This prioritizes using hot reloads for the api and web code. In addition to Docker,
@@ -50,23 +50,24 @@ yarn install
 yarn start
 ```
 
-The above commands will start the webapp on `localhost:3000.` Note it will still communicate with the server running on `8080` via a proxy.
-This will allow hot-reloads for the React web app.
+The above commands will start the webapp on `localhost:3000.` Note it will still communicate with the server 
+running on `8080` via a proxy. This will allow hot-reloads for the React web app.
 
 **IMPORTANT** If you go to localhost:8080, you will not see
-your most recent changes for the web app. Instead, go to localhost:3000.
+your most recent changes for the web app. Instead, go to localhost:3000 for
+local testing purposes.
 
 ### Integration Testing and CI/CD
 
-For testing, the "Test Environment" is used. The `.travis.yml` file specifies testing configuration. Currently,
-integration tests have been prioritized over stand-alone unit tests.
+For testing, the "Test Environment" is used. The `.travis.yml` file specifies testing
+configuration. Currently, integration tests have been prioritized over stand-alone unit tests.
 
 There are some node-based integration tests in the `./testing` directory. To run these,
 you will need to run `yarn install.` The tests can be run with `yarn test.` You can 
 run these tests from the repo root directory via `./run-tests.sh`
 
 **IMPORTANT:** In order for the tests to successfully run, you will need to have the Docker-compose environment
-running. Otherwise, they will fail. 
+running. Otherwise, the tests will fail. 
 
 These tests will also be run the CI pipeline.
 
@@ -79,6 +80,6 @@ TODO:
 - [ ] Frontend: Incorporate modern CSS lib, such as Tailwind or SCSS.
 - [ ] Cookie-based auth to track users.
 - [ ] Incorporate Swagger to reduce redundant client-side api code.
-- [ ] Include Cypress-based tests to improve true e2e coverage.   
+- [ ] Include Cypress-based browser tests to improve true e2e coverage.   
 - [ ] Look at caching mechanism (Redis/Memcache) for validating users.
 - [ ] Look at more scalable/performant mechanism for reading short-urls (such Redis or Cassandra/DynamoDB)

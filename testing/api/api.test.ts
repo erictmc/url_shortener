@@ -54,3 +54,15 @@ describe("valid api is working correctly",  () => {
         })
     })
 })
+
+describe("verify key static assets are available", () => {
+    it("root path '/' should return 200", async () =>{
+        const { status, data } = await axios.get(apiUrl)
+        expect(status).toEqual(200);
+    })
+
+    it("/robots.txt should return 200", async () =>{
+        const { status } = await axios.get(apiUrl + "/robots.txt")
+        expect(status).toEqual(200);
+    })
+})

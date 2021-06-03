@@ -11,8 +11,6 @@ services:
       dockerfile: Dockerfile.test
       args:
         app_env: local_development
-    volumes:
-      - ./api:/go/src/github.com/erictmc/url_shortener/api
     ports:
       - "8080:8080"
     links:
