@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import { Layout, Typography, Input, Button, Col, Row, message, Divider } from 'antd';
+
+import { UrlResult } from "./models/urls";
+import { UrlCard } from "./components/url-card";
+
+import { isValidUrl } from "./utils";
+import * as urlApi from "./api/urls-api"
+
 import './App.css';
 import 'antd/dist/antd.css';
-import { Layout, Input, Button, Col, Row, message, Divider, Card } from 'antd';
-import {isValidUrl} from "./utils";
-import * as urlApi from "./api/urls-api"
-import { UrlResult } from "./models/urls";
-import {UrlCard} from "./components/url-card";
 
 const { Header, Content, Footer } = Layout;
+const { Title }  = Typography
 
 
 export function App() {
@@ -49,20 +53,23 @@ export function App() {
               <Row>
                   <Col span={12} offset={6}>
                       <div id="form-container">
-                          <Input addonBefore="https://"
-                                 value={url}
-                                 placeholder={"www.example.com"}
-                                 onChange={(event) => setUrl(event.target.value)}
-                          />
-                          <div style={{width: "20px"}}/>
-                          <Button type="primary"
-                                  shape="round"
-                                  disabled={!checkUrl()}
-                                  loading={apiCallInProgress}
-                                  onClick={createUrl}
-                          >
-                              Create Tiny Url
-                          </Button>
+                          <Title level={2} id="form-header-text">Shorten Your Url!</Title>
+                          <div id="form-input">
+                              <Input addonBefore="https://"
+                                     value={url}
+                                     placeholder={"www.example.com"}
+                                     onChange={(event) => setUrl(event.target.value)}
+                              />
+                              <div style={{width: "20px"}}/>
+                              <Button type="primary"
+                                      shape="round"
+                                      disabled={!checkUrl()}
+                                      loading={apiCallInProgress}
+                                      onClick={createUrl}
+                              >
+                                  Create Tiny Url
+                              </Button>
+                          </div>
                       </div>
                   </Col>
               </Row>

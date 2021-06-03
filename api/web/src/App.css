@@ -10,6 +10,17 @@
 
 #form-container {
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#form-header-text {
+    color: #5c5c5c;
+}
+
+#form-input {
+    margin-top: 10px;
     padding: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, .2);
     border-radius: 5px;

@@ -5,7 +5,7 @@ import each from "jest-each";
 const apiUrl = "http://localhost:8080"
 
 const createUrlEntry = (originalUrl: string) => {
-    return axios.post(apiUrl + "/new", { original_url: originalUrl })
+    return axios.post(apiUrl + "/url/new", { original_url: originalUrl })
 }
 
 describe("valid api is working correctly",  () => {
@@ -21,6 +21,14 @@ describe("valid api is working correctly",  () => {
         expect(response.request._redirectable._redirectCount).toEqual(1)
         expect(response.status).toEqual(200);
         expect(response.request.res.responseUrl).toEqual(original_url)
+    })
+
+    it("verify unrecognized short-urls return 404", async () => {
+        try {
+            await axios.get("http://localhost:8080/foobarshouldfail")
+        } catch(e){
+            expect(e.response.status).toEqual(404)
+        }
     })
 
     describe("test invalid blank entries", () => {

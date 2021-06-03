@@ -16,6 +16,8 @@ const (
 	AllowedOriginsEnvVariable = "ALLOWED_ORIGINS"
 )
 
+// AppEnvironment provides access to information about the current server environment, as well as other
+// useful info, such Database connection.
 type AppEnvironment struct {
 	Db     models.AppDB
 	Logger *log.Logger
@@ -31,6 +33,7 @@ func (ae *AppEnvironment) BuildShortUrl(shortUrl string) string {
 	}
 }
 
+// CreateAppEnvironment establishes a database connection and builds out the app environment.
 func CreateAppEnvironment() AppEnvironment {
 	osEnvironmentVariableCheck()
 	isProductionEnv := IsProductionEnv()

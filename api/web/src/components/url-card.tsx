@@ -1,15 +1,8 @@
 
 import "./url-card.css"
-import {Divider, Card, message, Tooltip} from "antd";
+import { Card, message, Tooltip} from "antd";
 import { UrlResult } from "../models/urls";
 import { CopyOutlined } from '@ant-design/icons';
-
-type Props = {
-    originalUrl: string,
-    shortUrl: string
-}
-
-
 
 export function UrlCard({ originalUrl, shortUrl} : UrlResult){
 

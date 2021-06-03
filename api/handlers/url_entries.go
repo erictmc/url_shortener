@@ -27,6 +27,7 @@ func (u UrlForm) Validate() error {
 	)
 }
 
+// CreateShortUrl takes an url and creates a "short url" version of it.
 func CreateShortUrl(appEnv env.AppEnvironment) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		form := new(UrlForm)
@@ -51,7 +52,7 @@ func CreateShortUrl(appEnv env.AppEnvironment) echo.HandlerFunc {
 	}
 }
 
-
+// RouteToShortUrl takes a short url and routes to the original url.
 func RouteToShortUrl(appEnv env.AppEnvironment) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		shortUrl := c.Param("short_url")

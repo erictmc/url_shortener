@@ -13,6 +13,7 @@ func (adb *AppDB) CreateUrlEntry(origUrl string) (*UrlEntry, error) {
 	u := UrlEntry{}
 	u.OriginalUrl = origUrl
 
+	// TODO: For creating a random tiny url, this should be left to an outside service, to prevent name collisions.
 	newUrl, _ := GenerateRandomString(10)
 	u.ShortUrl = newUrl
 	if err := adb.DB.Create(&u).Error; err != nil {
