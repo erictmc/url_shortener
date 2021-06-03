@@ -4,11 +4,11 @@ services:
     env_file: .env.local
     image: postgres:13.3
 
-  api:
+  test_api:
     env_file: .env.local
     build:
       context: ./api
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.test
       args:
         app_env: local_development
     volumes:

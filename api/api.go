@@ -7,7 +7,6 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"io/ioutil"
-	"net/http"
 )
 
 func main() {
@@ -21,10 +20,11 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
+	e.File("/", "web/build/index.html")
+	e.File("/robots.txt", "web/build/robots.txt")
+	e.Static("/assets", "web/build/assets")
+	e.Static("/", "web/build/")
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!\n")
-	})
 	e.POST("/new", handlers.CreateShortUrl(appEnv))
 	e.GET("/:short_url", handlers.RouteToShortUrl(appEnv))
 

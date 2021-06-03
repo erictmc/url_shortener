@@ -1,0 +1,24 @@
+FROM golang:1.13-alpine3.11 as builder
+
+ENV APP_HOME /go/src/github.com/erictmc/url_shortener/api
+COPY . $APP_HOME
+WORKDIR $APP_HOME
+
+RUN apk add --no-cache git nodejs yarn
+RUN go build -o /go/bin/api
+
+WORKDIR $APP_HOME/web
+RUN yarn build
+
+# Step 2 -- Pruning down docker image
+FROM alpine:latest
+ENV APP_HOME /go/src/github.com/erictmc/url_shortener/api
+WORKDIR $APP_HOME
+RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache bash grep
+
+COPY --from=builder /go/bin/api /go/bin/api
+COPY --from=builder $APP_HOME/web/build $APP_HOME/web/build
+
+CMD /go/bin/api
+EXPOSE 8080

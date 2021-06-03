@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    env_file: .env.local
+    image: postgres:13.3
+
+  local_dev_api:
+    env_file: .env.local
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+      args:
+        app_env: local_development
+    volumes:
+      - ./api:/go/src/github.com/erictmc/url_shortener/api
+    ports:
+      - "8080:8080"
+    links:
+      - db
