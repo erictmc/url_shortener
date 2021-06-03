@@ -4,7 +4,6 @@ api/vendor
 
 # etc
 *.swp
-.env.local
 .env.script
 .idea
 .DS_Store
