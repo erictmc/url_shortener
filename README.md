@@ -73,7 +73,7 @@ These tests will also be run the CI pipeline.
 
 ### Items to Improve Scalability, Maintainability and Security 
 
-TODO:
+Next steps to improve stability and performance:
 
 - [ ] Consistent URL validation between client and server-side code.
 - [ ] Frontend: Improve Responsiveness.
@@ -82,4 +82,4 @@ TODO:
 - [ ] Incorporate Swagger to reduce redundant client-side api code.
 - [ ] Include Cypress-based browser tests to improve true e2e coverage.   
 - [ ] Look at caching mechanism (Redis/Memcache) for validating users.
-- [ ] Look at more scalable/performant mechanism for reading short-urls (such Redis or Cassandra/DynamoDB)
+- [ ] Look at more scalable/performant mechanism for reading short-urls (such as Redis or Cassandra/DynamoDB)
